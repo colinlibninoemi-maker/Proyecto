@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Code</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#fff0f6;
+}
+
+/* NAV */
+header{
+  background:#ff4fa3;
+  color:white;
+  padding:15px;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:900px;
+  margin:auto;
+}
+
+.logo{
+  margin:0;
+}
+
+#buscador{
+  padding:8px;
+  border-radius:8px;
+  border:none;
+  width:180px;
+}
+
+/* CONTENIDO */
+.container{
+  width:90%;
+  margin:auto;
+  padding:20px;
+}
+
+h2{
+  color:#ff4fa3;
+}
+
+details{
+  background:white;
+  margin-bottom:15px;
+  border-radius:10px;
+  padding:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+summary{
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.product{
+  border-top:1px solid #eee;
+  padding:12px;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  box-shadow:0 6px 12px rgba(0,0,0,0.15);
+}
+
+.price{
+  color:#ff4fa3;
+  font-weight:bold;
+}
+
+button{
+  background:#ff4fa3;
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#e13e8f;
+}
+
+/* CARRITO */
+#carrito li{
+  margin-bottom:5px;
+}
+
+/* ESTRELLAS */
+.rating span{
+  font-size:30px;
+  cursor:pointer;
+  color:#ccc;
+}
+
+.rating span.active{
+  color:gold;
+}
+
+.review{
+  background:#fff;
+  padding:10px;
+  border-radius:8px;
+  margin-top:10px;
+  box-shadow:0 1px 5px rgba(0,0,0,0.1);
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  font-size:28px;
+  padding:12px 16px;
+  border-radius:50%;
+  text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  background:#ff4fa3;
+  color:white;
+  padding:20px;
+  margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+    <h1 class="logo">Beauty Code</h1>
+    <input type="text" id="buscador" placeholder="Buscar producto..." onkeyup="buscarProducto()">
+  </nav>
+  <p style="text-align:center;">Resalta tu belleza con productos profesionales 💄</p>
+</header>
+
+<div class="container">
+<h2>🛒 Carrito</h2>
+<ul id="carrito"></ul>
+<p><strong>Total: $<span id="total">0</span> MXN</strong></p>
+<button onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
+</div>
+
+<div class="container">
+<h2>Maquillaje</h2>
+
+<details open>
+<summary>💋 Labiales</summary>
+
+<div class="product">
+Rojo Pasión — <span class="price">$120</span><br><br>
+<button onclick="agregarCarrito('Labial Rojo Pasión',120)">Agregar</button>
+</div>
+
+<div class="product">
+Nude Elegance — <span class="price">$120</span><br><br>
+<button onclick="agregarCarrito('Labial Nude Elegance',120)">Agregar</button>
+</div>
+
+<div class="product">
+Rosa Barbie — <span class="price">$120</span><br><br>
+<button onclick="agregarCarrito('Labial Rosa Barbie',120)">Agregar</button>
+</div>
+
+</details>
+
+<details>
+<summary>✨ Sombras</summary>
+
+<div class="product">
+Paleta Nude — <span class="price">$180</span><br><br>
+<button onclick="agregarCarrito('Paleta Nude',180)">Agregar</button>
+</div>
+
+<div class="product">
+Brillos Glam — <span class="price">$190</span><br><br>
+<button onclick="agregarCarrito('Brillos Glam',190)">Agregar</button>
+</div>
+
+</details>
+
+<details>
+<summary>💧 Bases</summary>
+
+<div class="product">
+Cobertura Total — <span class="price">$210</span><br><br>
+<button onclick="agregarCarrito('Base Cobertura Total',210)">Agregar</button>
+</div>
+
+</details>
+
+<h2>Brochas</h2>
+
+<details>
+<summary>🖌️ Profesionales</summary>
+
+<div class="product">
+Brocha para Base — <span class="price">$95</span><br><br>
+<button onclick="agregarCarrito('Brocha Base',95)">Agregar</button>
+</div>
+
+</details>
+
+<h2>Lociones</h2>
+
+<details>
+<summary>🌸 Fragancias</summary>
+
+<div class="product">
+Fresh Bloom — <span class="price">$250</span><br><br>
+<button onclick="agregarCarrito('Fresh Bloom',250)">Agregar</button>
+</div>
+
+</details>
+
+<h2>Estuches</h2>
+
+<details>
+<summary>🎀 Kits</summary>
+
+<div class="product">
+Kit Profesional — <span class="price">$650</span><br><br>
+<button onclick="agregarCarrito('Kit Profesional',650)">Agregar</button>
+</div>
+
+</details>
+
+</div>
+
+<!-- OPINIONES -->
+<div class="container">
+<h2>Opiniones & Comentarios</h2>
+
+<form id="reviewForm">
+<input type="text" id="nombre" placeholder="Tu nombre" required style="width:100%; padding:10px; margin-bottom:10px;">
+<textarea id="comentario" placeholder="Escribe tu comentario..." required style="width:100%; padding:10px; height:90px;"></textarea>
+
+<h3>⭐ Califica nuestros servicios</h3>
+
+<div class="rating" id="rating">
+<span data-value="1">⭐</span>
+<span data-value="2">⭐</span>
+<span data-value="3">⭐</span>
+<span data-value="4">⭐</span>
+<span data-value="5">⭐</span>
+</div>
+
+<br>
+<button type="submit">Enviar opinión</button>
+</form>
+
+<div id="reviewsContainer"></div>
+</div>
+
+<footer>
+<p>Pedidos por WhatsApp:</p>
+<p><strong>+52 55 4001 5229</strong></p>
+<p>Instagram: @BeautyCode</p>
+<p>© 2026 Beauty Code</p>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/525540015229" target="_blank">💬</a>
+
+<script>
+function buscarProducto(){
+  const input = document.getElementById("buscador").value.toLowerCase();
+  const productos = document.querySelectorAll(".product");
+  productos.forEach(p => {
+    const texto = p.innerText.toLowerCase();
+    p.style.display = texto.includes(input) ? "block" : "none";
+  });
+}
+
+let carrito = [];
+let total = 0;
+
+function agregarCarrito(nombre, precio){
+  carrito.push(nombre);
+  total += precio;
+
+  const lista = document.getElementById("carrito");
+  const item = document.createElement("li");
+  item.textContent = nombre + " - $" + precio;
+  lista.appendChild(item);
+
+  document.getElementById("total").textContent = total;
+}
+
+function enviarPedido(){
+  if(carrito.length === 0){
+    alert("Tu carrito está vacío");
+    return;
+  }
+
+  const numero = "525540015229";
+  const mensaje = "Hola, quiero pedir:\n" + carrito.join("\n") + "\nTotal: $" + total + " MXN";
+
+  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`);
+}
+
+let ratingValue = 0;
+const stars = document.querySelectorAll("#rating span");
+
+stars.forEach(star => {
+  star.addEventListener("click", () => {
+    ratingValue = star.dataset.value;
+    stars.forEach(s => s.classList.remove("active"));
+    for(let i=0; i<ratingValue; i++){
+      stars[i].classList.add("active");
+    }
+  });
+});
+
+document.getElementById("reviewForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const comentario = document.getElementById("comentario").value;
+
+  if(ratingValue == 0){
+    alert("Selecciona una calificación ⭐");
+    return;
+  }
+
+  const review = {nombre, comentario, rating: ratingValue};
+
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  reviews.push(review);
+  localStorage.setItem("reviews", JSON.stringify(reviews));
+
+  mostrarReviews();
+
+  this.reset();
+  stars.forEach(s => s.classList.remove("active"));
+  ratingValue = 0;
+});
+
+function mostrarReviews(){
+  const container = document.getElementById("reviewsContainer");
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+  container.innerHTML = "<h3>Opiniones de clientes:</h3>";
+
+  reviews.forEach(r => {
+    container.innerHTML += `
+      <div class="review">
+        <strong>${r.nombre}</strong><br>
+        ${"⭐".repeat(r.rating)}<br>
+        ${r.comentario}
+      </div>
+    `;
+  });
+}
+
+mostrarReviews();
+</script>
+
+</body>
+  </html>
